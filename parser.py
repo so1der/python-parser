@@ -115,6 +115,7 @@ def telegramErrorLog():
 
 
 if __name__ == '__main__':
+    #examples
     mainParser(name = "AnimeNewsNetwork", url = "https://www.animenewsnetwork.com/all/?topic=games", chat_id = "837475124", post_html_block = "div", post_html_class = "wrap", text_html_block = "a")
     mainParser(name = "OtakuMode", url = "https://otakumode.com/news?q=", chat_id = "837475124", post_html_block = "article", post_html_class = "p-article p-article-list__item c-hit", text_html_block = "a", text_html_class = "inherit")
     time.sleep(10)
