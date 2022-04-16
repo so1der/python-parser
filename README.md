@@ -23,10 +23,10 @@ Last 4 parameters vary from website to website, so to make parser more multipurp
 
 Somehow, but parser need to understand, what he has already "posted", or "sended", or whatever he doing after you modified him. For the script to work correctly, you need to create file, named '_**data_file.json**_', and add there json parameters like this - {'name': 'url', 'name': 'url'}. _name_ from fson file, and _name_ from functions parameters must match. This json file contains url of last post which he processed. An example is also in the files.
 
-<h3>**Telegram Bot TOKEN**</h3>
+<h3>Telegram Bot TOKEN</h3>
 
 You also need to put your bot's token in API_TOKEN = '', so script can use your telegram bot to send messages.
 
 <h3>Word about logs</h3>
 
-I took out logs as a separate functions, so you can easily change them. For example, parsingEndLog() says that "parsing has been complete, next check after 1 hour", because my CRON launch this script once per houre. But maybe you want to lauch it more often? Go ahead! But don't forget to change this information in logs :) You can also modified it to save logs in txt file. Or whatever you like!
+I took out logs as a separate functions, so you can easily change them. For example, parsingEndLog() says that "parsing has been complete, next check after 1 hour", because my CRON launch this script once per hour. But maybe you want to lauch it more often? Go ahead! But don't forget to change this information in logs :) You can also modified it to save logs in txt file. Or whatever you like!
