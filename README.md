@@ -5,7 +5,7 @@ Main part of this script is the function called "mainParser". By calling this fu
 
 _**name**_ - this is name of website that you parsing. This parameter needed for logs, and for json file
 
-_**url** _- this is url, which shows the post-page. You can see some examples in .py file
+_**url**_ - this is url, which shows the post-page. You can see some examples in .py file
 
 _**chat_id**_ - this is telegram chat id, where messages will be sent. I made it as a separate parameter, because maybe someone wants to send messages in differents caht/channels
 
