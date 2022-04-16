@@ -94,8 +94,8 @@ def messageHendler(url, title, name):
     global clear_url
     global chatid
     html_link = "<a href=\"" + url + "\">Source</a>"
-    newPostLog(name)
     bot.send_message(chatid, title + "\n \n" + html_link + "\n",parse_mode="HTML")
+    newPostLog(name)
 
 
 
