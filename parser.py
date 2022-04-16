@@ -54,6 +54,10 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
 
     list_count = 0
 
+    with open("data_file.json") as json_file:
+        json_list = json.load(json_file)
+        json_file.close()
+
     newPostPoster(current_post_id = 0, name = name)
 
     parsingEndLog(name)
@@ -66,18 +70,14 @@ def newPostPoster(current_post_id, name):
     global clear_url
     current_post_id = 0
 
-    with open("data_file.json") as json_file:
-    	json_list = json.load(json_file)
-    	json_file.close()
     if links_storage[list_count] == json_list[name]:
         list_count -= 1
         return
     else:
         list_count += 1
-        isNewPost(current_post_id = 1, name = name)
+        newPostPoster(current_post_id = 1, name = name)
         try:
             compllink = clear_url + links_storage[list_count]
-            print(compllink)
             messageHendler(url = compllink, title = titles_storage[list_count], name = name)
         except:
             telegramErrorLog()
@@ -115,7 +115,6 @@ def telegramErrorLog():
 
 
 if __name__ == '__main__':
-    #examples
     mainParser(name = "AnimeNewsNetwork", url = "https://www.animenewsnetwork.com/all/?topic=games", chat_id = "837475124", post_html_block = "div", post_html_class = "wrap", text_html_block = "a")
     mainParser(name = "OtakuMode", url = "https://otakumode.com/news?q=", chat_id = "837475124", post_html_block = "article", post_html_class = "p-article p-article-list__item c-hit", text_html_block = "a", text_html_class = "inherit")
     time.sleep(10)
