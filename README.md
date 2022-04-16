@@ -21,7 +21,7 @@ Last 4 parameters vary from website to website, so to make parser more multipurp
 
 <h3>JSON file</h3>
 
-Somehow, but parser need to understand, what he has already "posted", or "sended", or whatever he doing after you modified him. For the script to work correctly, you need to create file, named '_**data_file.json**_', and add there json parameters like this - {'name': 'url', 'name': 'url'}. _name_ from fson file, and _name_ from functions parameters must match. This json file contains url of last post which he processed. An example is also in the files.
+Somehow, but parser need to understand, what he has already "posted", or "sended", or whatever he doing after you modified him. For the script to work correctly, you need to create file, named '_**data_file.json**_', and add there json parameters like this - {'name': 'url', 'name': 'url'}. _name_ from json file, and _name_ from functions parameters must match. This json file contains url of last post which he processed. An example is also in the files.
 
 <h3>Telegram Bot TOKEN</h3>
 
