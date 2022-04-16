@@ -9,7 +9,7 @@ _**url**_ - this is url, which shows the post-page. You can see some examples in
 
 _**chat_id**_ - this is telegram chat id, where messages will be sent. I made it as a separate parameter, because maybe someone wants to send messages in differents caht/channels
 
-_**post_html_block**_ and _**post_html_class**_ - .py file have example for OtakuMode.com and AnimeNewsNetwork. You need to go to the url, and find html block with post. There you can find html tag and class, this will be these parameters.
+_**post_html_block**_ and _**post_html_class**_ - .py file have example for OtakuMode and AnimeNewsNetwork. You need to go to the url, and find html block with post. There you can find html tag and class, this will be these parameters.
 More details you can see in the picture:
 ![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/post%20block%20example.png "post block at OtakuMode")​
 
