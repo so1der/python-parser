@@ -58,7 +58,11 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
         json_list = json.load(json_file)
         json_file.close()
 
-    newPostPoster(current_post_id = 0, name = name)
+    if newPostPoster(current_post_id = 0, name = name):
+        with open('data_file.json', 'w') as json_file:
+            json_file.write(json.dumps(json_list))
+            json_file.close()
+
 
     parsingEndLog(name)
 
@@ -72,23 +76,24 @@ def newPostPoster(current_post_id, name):
 
     if links_storage[list_count] == json_list[name]:
         list_count -= 1
-        return
+        sending_success = False
+        return sending_success
     else:
         list_count += 1
         newPostPoster(current_post_id = 1, name = name)
         try:
             compllink = clear_url + links_storage[list_count]
             messageHendler(url = compllink, title = titles_storage[list_count], name = name)
+            sending_success = True
         except:
+            sending_success = False
             telegramErrorLog()
-            return
+            return sending_success
         json_list[name] = links_storage[list_count]
-        with open('data_file.json', 'w') as json_file:
-            json_file.write(json.dumps(json_list))
-            json_file.close()
+
 
         list_count -= 1
-        return
+        return sending_success
         
 def messageHendler(url, title, name):
     global clear_url
@@ -119,5 +124,4 @@ if __name__ == '__main__':
     mainParser(name = "OtakuMode", url = "https://otakumode.com/news?q=", chat_id = "837475124", post_html_block = "article", post_html_class = "p-article p-article-list__item c-hit", text_html_block = "a", text_html_class = "inherit")
     time.sleep(10)
     exit()
-
 
