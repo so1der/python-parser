@@ -7,7 +7,7 @@ _**name**_ - this is name of website that you parsing. This parameter needed for
 
 _**url**_ - this is url, which shows the post-page. You can see some examples in .py file
 
-_**chat_id**_ - this is telegram chat id, where messages will be sent. I made it as a separate parameter, because maybe someone wants to send messages in differents caht/channels
+_**chat_id**_ - this is telegram chat id, where messages will be sent. I made it as a separate parameter, because maybe someone wants to send messages in differents chat/channels
 
 _**post_html_block**_ and _**post_html_class**_ - .py file have example for OtakuMode and AnimeNewsNetwork. You need to go to the url, and find html block with post. There you can find html tag and class, this will be these parameters.
 More details you can see in the picture:
