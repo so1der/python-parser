@@ -1,8 +1,6 @@
 from bs4 import BeautifulSoup
 import telebot
 import requests
-import asyncio
-import logging
 import time
 import json
 import re
@@ -11,12 +9,12 @@ API_TOKEN = ''
 bot = telebot.TeleBot(API_TOKEN)
 
 
-def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_block, text_html_class = None):
+def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_block, text_html_class=None):
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36',
-        'method' : 'GET',
-        'accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+        'method': 'GET',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
     }
 
     global clear_url
@@ -24,9 +22,9 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
 
     global chatid
     chatid = chat_id
-    
+
     try:
-        response = requests.get(url, headers = headers)
+        response = requests.get(url, headers=headers)
     except:
         noAccessLog(name)
         return
@@ -38,14 +36,14 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
     global titles_storage
     global json_list
     list_count = 0
-    links_storage =  []
+    links_storage = []
     titles_storage = []
-    
+
     for post in posts:
-        if text_html_class  == None:     
+        if text_html_class is None:
             post = post.find(str(text_html_block))
         else:
-            post = post.find(text_html_block,{'class':text_html_class})
+            post = post.find(text_html_block, {'class': text_html_class})
 
         if post is not None:
             links_storage.append(str(post.get('href')))
@@ -58,12 +56,10 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
         json_list = json.load(json_file)
         json_file.close()
 
-    if newPostPoster(current_post_id = 0, name = name):
+    if newPostPoster(current_post_id=0, name=name):
         with open('data_file.json', 'w') as json_file:
             json_file.write(json.dumps(json_list))
             json_file.close()
-
-
     parsingEndLog(name)
 
 
@@ -80,43 +76,43 @@ def newPostPoster(current_post_id, name):
         return sending_success
     else:
         list_count += 1
-        newPostPoster(current_post_id = 1, name = name)
+        newPostPoster(current_post_id=1, name=name)
         try:
             compllink = clear_url + links_storage[list_count]
-            messageHendler(url = compllink, title = titles_storage[list_count], name = name)
+            messageHendler(url=compllink, title=titles_storage[list_count], name=name)
             sending_success = True
         except:
             sending_success = False
             telegramErrorLog()
             return sending_success
         json_list[name] = links_storage[list_count]
-
-
         list_count -= 1
         return sending_success
-        
+
+
 def messageHendler(url, title, name):
     global clear_url
     global chatid
     html_link = "<a href=\"" + url + "\">Source</a>"
-    bot.send_message(chatid, title + "\n \n" + html_link + "\n",parse_mode="HTML")
+    #bot.send_message(chatid, title + "\n \n" + html_link + "\n", parse_mode="HTML")
     newPostLog(name)
-
 
 
 def parsingEndLog(name):
     named_tuple = time.localtime()
-    print("["+ time.strftime("%H:%M:%S", named_tuple) + "] " + name + " parsing has been complete, next check after 1 hour")
+    print("[" + time.strftime("%H:%M:%S", named_tuple) + "] " + name + " parsing has been complete, next check after 1 hour")
+
 
 def noAccessLog(name):
     print("There is no access to " + name + ". Check internet, restart script, or wait half an hour, script will try again.")
 
+
 def newPostLog(name):
     print("New post has been posted from " + name + "!")
 
+
 def telegramErrorLog():
     print("An error occurred while sending a message to telegram")
-
 
 
 if __name__ == '__main__':
@@ -124,4 +120,3 @@ if __name__ == '__main__':
     mainParser(name = "OtakuMode", url = "https://otakumode.com/news?q=", chat_id = "837475124", post_html_block = "article", post_html_class = "p-article p-article-list__item c-hit", text_html_block = "a", text_html_class = "inherit")
     time.sleep(10)
     exit()
-
