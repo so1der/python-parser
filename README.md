@@ -7,7 +7,7 @@ _**name**_ - this is name of website that you parsing. This parameter needed for
 
 _**url**_ - this is url, which shows the post-page. You can see some examples in .py file
 
-_**chat_id**_ - this is telegram chat id, where messages will be sent. I made it as a separate parameter, because maybe someone wants to send messages in differents chat/channels. 
+~~_**chat_id**_~~ - this is telegram chat id, where messages will be sent. I made it as a separate parameter, because maybe someone wants to send messages in differents chat/channels. 
 
 **UPDATE: Scince v1.3 chat_id is no longer function parameter**
 
@@ -36,4 +36,6 @@ You also need to put your bot's token in API_TOKEN = '', so script can use your 
 I took out logs as a separate functions, so you can easily change them. For example, parsingEndLog() says that "parsing has been complete, next check after 1 hour", because my CRON launch this script once per hour. But maybe you want to lauch it more often? Go ahead! But don't forget to change this information in logs :) You can also modified it to save logs in txt file. Or whatever you like!
 
 <h3>Work example</h3>
+In the picture below you can see examples of posts by this parser. You can also see it in this telegram channel: https://t.me/animenewsparser
+
 ![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/work_example.png "posts example")​
