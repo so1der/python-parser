@@ -6,10 +6,11 @@ import json
 import re
 
 API_TOKEN = ''
+chat_id = '837475124'
 bot = telebot.TeleBot(API_TOKEN)
 
 
-def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_block, text_html_class=None):
+def mainParser(name, url, post_html_block, post_html_class, text_html_block, text_html_class=None):
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36',
@@ -20,9 +21,6 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
     global clear_url
     clear_url = (re.match("^(https?:\/\/)?(www.){0,1}([0-9A-Za-z]+.)([A-Za-z]+)", url)).group()
 
-    global chatid
-    chatid = chat_id
-
     try:
         response = requests.get(url, headers=headers)
     except:
@@ -31,7 +29,6 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
     soup = BeautifulSoup(response.text, "html.parser")
     posts = soup.find_all(str(post_html_block), class_=str(post_html_class))
 
-    global list_count
     global links_storage
     global titles_storage
     global json_list
@@ -49,35 +46,33 @@ def mainParser(name, url, chat_id, post_html_block, post_html_class, text_html_b
             links_storage.append(str(post.get('href')))
             titles_storage.append(str(post.text))
             list_count += 1
-
+    links_amount = list_count
     list_count = 0
 
     with open("data_file.json") as json_file:
         json_list = json.load(json_file)
         json_file.close()
 
-    if newPostPoster(current_post_id=0, name=name):
+    if newPostPoster(name=name, list_count=list_count, links_amount=links_amount):
         with open('data_file.json', 'w') as json_file:
-            json_file.write(json.dumps(json_list))
+            json_file.write(json.dumps(json_list, indent=4))
             json_file.close()
     parsingEndLog(name)
 
 
-def newPostPoster(current_post_id, name):
-
-    global list_count
+def newPostPoster(name, list_count, links_amount):
     global json_list
-    global clear_url
-    current_post_id = 0
-
+    if list_count == links_amount:
+        return
     if links_storage[list_count] == json_list[name]:
         list_count -= 1
         sending_success = False
         return sending_success
     else:
         list_count += 1
-        newPostPoster(current_post_id=1, name=name)
+        newPostPoster(name=name, list_count=list_count, links_amount=links_amount)
         try:
+            list_count -= 1
             compllink = clear_url + links_storage[list_count]
             messageHendler(url=compllink, title=titles_storage[list_count], name=name)
             sending_success = True
@@ -86,15 +81,12 @@ def newPostPoster(current_post_id, name):
             telegramErrorLog()
             return sending_success
         json_list[name] = links_storage[list_count]
-        list_count -= 1
         return sending_success
 
 
 def messageHendler(url, title, name):
-    global clear_url
-    global chatid
     html_link = "<a href=\"" + url + "\">Source</a>"
-    #bot.send_message(chatid, title + "\n \n" + html_link + "\n", parse_mode="HTML")
+    bot.send_message(chat_id, title + "\n \n" + html_link + "\n", parse_mode="HTML")
     newPostLog(name)
 
 
@@ -116,7 +108,7 @@ def telegramErrorLog():
 
 
 if __name__ == '__main__':
-    mainParser(name = "AnimeNewsNetwork", url = "https://www.animenewsnetwork.com/all/?topic=games", chat_id = "837475124", post_html_block = "div", post_html_class = "wrap", text_html_block = "a")
-    mainParser(name = "OtakuMode", url = "https://otakumode.com/news?q=", chat_id = "837475124", post_html_block = "article", post_html_class = "p-article p-article-list__item c-hit", text_html_block = "a", text_html_class = "inherit")
+    mainParser(name="AnimeNewsNetwork", url="https://www.animenewsnetwork.com/all/?topic=games", post_html_block="div", post_html_class="wrap", text_html_block="a")
+    mainParser(name="OtakuMode", url="https://otakumode.com/news?q=", post_html_block="article", post_html_class="p-article p-article-list__item c-hit", text_html_block="a", text_html_class="inherit")
     time.sleep(10)
     exit()
