@@ -85,22 +85,22 @@ def newPostPoster(name, list_count, links_amount):
 
 
 def messageHendler(url, title, name):
-    html_link = "<a href=\"" + url + "\">Source</a>"
-    bot.send_message(chat_id, title + "\n \n" + html_link + "\n", parse_mode="HTML")
+    html_link = f"<a href=\"{url}\">Source</a>"
+    bot.send_message(chat_id,f"{title}\n \n{html_link}\n", parse_mode="HTML")
     newPostLog(name)
 
 
 def parsingEndLog(name):
-    named_tuple = time.localtime()
-    print("[" + time.strftime("%H:%M:%S", named_tuple) + "] " + name + " parsing has been complete, next check after 1 hour")
+    current_time = time.strftime("%H:%M:%S", time.localtime())
+    print(f"[{current_time}] {name} parsing has been complete, next check after 1 hour")
 
 
 def noAccessLog(name):
-    print("There is no access to " + name + ". Check internet, restart script, or wait half an hour, script will try again.")
+    print(f"There is no access to {name}. Check internet, restart script, or wait half an hour, script will try again.")
 
 
 def newPostLog(name):
-    print("New post has been posted from " + name + "!")
+    print(f"New post has been posted from {name}!")
 
 
 def telegramErrorLog():
