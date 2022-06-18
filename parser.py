@@ -20,10 +20,9 @@ def mainParser(name, url, post_html_block, post_html_class, text_html_block, tex
 
     global clear_url
     clear_url = (re.match("^(https?:\/\/)?(www.){0,1}([0-9A-Za-z]+.)([A-Za-z]+)", url)).group()
-
     try:
         response = requests.get(url, headers=headers)
-    except:
+    except requests.exceptions.ConnectionError:
         noAccessLog(name)
         return
     soup = BeautifulSoup(response.text, "html.parser")
