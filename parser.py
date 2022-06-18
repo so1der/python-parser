@@ -6,7 +6,7 @@ import json
 import re
 
 API_TOKEN = ''
-chat_id = '837475124'
+chat_id = ''
 bot = telebot.TeleBot(API_TOKEN)
 
 
