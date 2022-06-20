@@ -13,11 +13,11 @@ _**url**_ - this is url, which shows the post-page. You can see some examples in
 
 _**post_html_block**_ and _**post_html_class**_ - .py file have example for OtakuMode and AnimeNewsNetwork. You need to go to the url, and find html block with post. There you can find html tag and class, this will be these parameters.
 More details you can see in the picture:
-![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/post%20block%20example.png "post block at OtakuMode")​
+![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/images/post%20block%20example.png "post block at OtakuMode")​
 
 _**text_html_block**_ and _**text_html_class**_ - just like last parameters, this is also html tag and class, but for clickable title of the post. Easier to see:
 
-![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/text%20block%20example.png "title block at OtakuMode")​
+![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/images/text%20block%20example.png "title block at OtakuMode")​
 
 Last 4 parameters vary from website to website, so to make parser more multipurpose, i make them as a separate parameters. For example, sometimes you don't need 'class' to designate clickable title, so **text_html_class** = None by default.
 
@@ -38,4 +38,4 @@ I took out logs as a separate functions, so you can easily change them. For exam
 <h3>Work example</h3>
 In the picture below you can see examples of posts by this parser. You can also see it in this telegram channel: https://t.me/animenewsparser
 
-![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/work_example.png "posts example")​
+![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/images/work_example.png "posts example")​
