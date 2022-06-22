@@ -50,12 +50,10 @@ def mainParser(name, url, post_html_block, post_html_class, text_html_block, tex
 
     with open("data_file.json") as json_file:
         json_list = json.load(json_file)
-        json_file.close()
 
     if newPostPoster(name=name, list_count=list_count, links_amount=links_amount):
         with open('data_file.json', 'w') as json_file:
             json_file.write(json.dumps(json_list, indent=4))
-            json_file.close()
     parsingEndLog(name)
 
 
