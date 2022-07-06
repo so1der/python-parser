@@ -36,6 +36,8 @@ You also need to put your bot's token in API_TOKEN = '', so script can use your 
 I took out logs as a separate functions, so you can easily change them. For example, parsingEndLog() says that "parsing has been complete, next check after 1 hour", because my CRON launch this script once per hour. But maybe you want to lauch it more often? Go ahead! But don't forget to change this information in logs :) You can also modified it to save logs in txt file. Or whatever you like!
 
 <h3>Work example</h3>
-In the picture below you can see examples of posts by this parser. You can also see it in this telegram channel: https://t.me/animenewsparser
+In the picture below you can see examples of posts by this parser. You can also see it in this telegram channel:
+
+- [Anime News](https://t.me/animenewsparser)
 
 ![alt tag](https://raw.githubusercontent.com/so1der/python-parser/main/images/work_example.png "posts example")​
